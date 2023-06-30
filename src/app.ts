@@ -8,9 +8,8 @@ const app: Application = express();
 
 app.use(cors());
 
-// parser
+// parser test
 app.use(express.json());
-
 
 app.use(express.urlencoded({ extended: true }));
 
