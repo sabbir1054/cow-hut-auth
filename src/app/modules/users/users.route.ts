@@ -11,7 +11,11 @@ router.post(
   UserController.createUser
 );
 router.delete('/:id', UserController.deleteUser);
-router.patch('/:id', UserController.updateUser);
+router.patch(
+  '/:id',
+  validateRequest(UserValidation.updateUserZodSchema),
+  UserController.updateUser
+);
 router.get('/:id', UserController.getSingleUser);
 router.get('/', UserController.getAllUsers);
 
