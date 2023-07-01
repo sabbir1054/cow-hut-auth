@@ -16,6 +16,13 @@ router.post(
 
 /* Admin ===> All Order*/
 router.get(
+  '/:id',
+  Auth.validateSpecificUser(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.BUYER),
+  OrderController.getSingleOrders
+);
+
+/* Admin ===> All Order*/
+router.get(
   '/',
   Auth.validateUsersRole(ENUM_USER_ROLE.ADMIN),
   OrderController.getAllOrders

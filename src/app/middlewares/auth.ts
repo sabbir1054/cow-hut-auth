@@ -80,7 +80,6 @@ const validateSpecificUser =
           path: 'cow',
           populate: [{ path: 'seller' }],
         });
-        console.log(orderInfo);
 
         const sellerFromDB = orderInfo?.cow?.seller;
         if (sellerFromDB?._id.toString() === verifiedUser.userId) {
@@ -90,7 +89,7 @@ const validateSpecificUser =
 
       if (verifiedUser.role === 'buyer') {
         findUser = await Order.findOne({
-          cow: req.params.id,
+          _id: req.params.id,
           buyer: verifiedUser.userId,
         });
       }

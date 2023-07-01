@@ -108,7 +108,15 @@ const getAllOrdersFromDB = async (): Promise<IOrder[]> => {
   return result;
 };
 
+const getSingleOrdersFromDB = async (id: string): Promise<IOrder | null> => {
+  const result = await Order.findById(id)
+    .populate('buyer')
+    .populate({ path: 'cow', populate: [{ path: 'seller' }] });
+  return result;
+};
+
 export const OrderService = {
   createOrderToDB,
   getAllOrdersFromDB,
+  getSingleOrdersFromDB,
 };
