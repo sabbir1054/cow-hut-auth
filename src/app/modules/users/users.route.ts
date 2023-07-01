@@ -13,6 +13,12 @@ router.get(
   Auth.validateUsersRole(ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
   UserController.getMyProfile
 );
+router.patch(
+  '/my-profile',
+  validateRequest(UserValidation.updateUserZodSchema),
+  Auth.validateUsersRole(ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
+  UserController.updateMyProfile
+);
 
 router.post(
   '/signup',

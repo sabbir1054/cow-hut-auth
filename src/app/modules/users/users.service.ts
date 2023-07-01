@@ -1,6 +1,8 @@
+import bcrypt from 'bcrypt';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import { SortOrder } from 'mongoose';
+import config from '../../../config';
 import ApiError from '../../../errors/ApiErrors';
 import { paginationHelpers } from '../../../helpers/paginationHelpers';
 import IPaginationOptions from '../../../interfaces/paginations';
@@ -84,6 +86,14 @@ const updateUserToDB = async (
 
   const { name, ...userData } = payload;
 
+  if (userData.password) {
+    const newPassWord = await bcrypt.hash(
+      userData.password,
+      Number(config.bcrypt_salt_rounds)
+    );
+    userData.password = newPassWord;
+  }
+
   const updatedUserData: Partial<IUser> = { ...userData };
 
   if (name && Object.keys(name).length > 0) {
@@ -100,6 +110,10 @@ const updateUserToDB = async (
 };
 
 const deleteUserFromDB = async (id: string): Promise<IUser | null> => {
+  const isExist = await User.findById(id);
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found !');
+  }
   const result = await User.findByIdAndDelete(id);
   return result;
 };
