@@ -14,10 +14,14 @@ router.post(
   OrderController.createOrder
 );
 
-/* Admin ===> All Order*/
+/* Specific user  ===> Specific Order*/
 router.get(
   '/:id',
-  Auth.validateSpecificUser(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.BUYER),
+  Auth.validateSpecificUser(
+    ENUM_USER_ROLE.SELLER,
+    ENUM_USER_ROLE.BUYER,
+    ENUM_USER_ROLE.ADMIN
+  ),
   OrderController.getSingleOrders
 );
 
