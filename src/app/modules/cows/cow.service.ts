@@ -104,7 +104,9 @@ const updateCowToDB = async (
   if (!isExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Cow not Found');
   }
-  const result = await Cow.findByIdAndUpdate(id, payload, { new: true });
+  const result = await Cow.findByIdAndUpdate(id, payload, {
+    new: true,
+  }).populate('seller');
   return result;
 };
 const deleteCowFromDB = async (id: string): Promise<ICow | null> => {
