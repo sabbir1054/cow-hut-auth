@@ -69,4 +69,18 @@ UserSchema.pre('save', async function (next: NextFunction) {
   next();
 });
 
+// is exist and password match
+UserSchema.statics.isUserExist = async function (
+  phoneNumber: string
+): Promise<Pick<IUser, '_id' | 'password' | 'role'> | null> {
+  return User.findOne({ phoneNumber }, { _id: 1, role: 1, password: 1 });
+};
+// password match
+UserSchema.statics.isPasswordMatched = async function (
+  givenPassword: string,
+  savedPassword: string
+): Promise<boolean> {
+  return await bcrypt.compare(givenPassword, savedPassword);
+};
+
 export const User = model<IUser, UserModel>('User', UserSchema);

@@ -1,4 +1,5 @@
 import { AdminRoutes } from '../modules/admin/admin.route';
+import { AuthRoutes } from '../modules/auth/auth.route';
 import { CowRoutes } from '../modules/cows/cow.route';
 import { OrderRoutes } from '../modules/orders/order.route';
 import { UserRoutes } from '../modules/users/users.route';
@@ -23,6 +24,10 @@ const modulesRoute = [
   {
     path: '/admins/',
     route: AdminRoutes,
+  },
+  {
+    path: '/auth/',
+    route: AuthRoutes,
   },
 ];
 
