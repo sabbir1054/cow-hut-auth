@@ -104,10 +104,20 @@ const deleteUserFromDB = async (id: string): Promise<IUser | null> => {
   return result;
 };
 
+const getMyProfileFromDB = async (id: string): Promise<IUser | null> => {
+  const result = await User.findById(id, {
+    name: 1,
+    phoneNumber: 1,
+    address: 1,
+  });
+  return result;
+};
+
 export const UserService = {
   createUserToDB,
   getAllUsersFromDB,
   getSingleUserFromDB,
   updateUserToDB,
   deleteUserFromDB,
+  getMyProfileFromDB,
 };

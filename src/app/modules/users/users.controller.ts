@@ -79,11 +79,11 @@ const deleteUser = catchAsync(async (req: Request, res: Response) => {
 
 // get my profile
 const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserService.getSingleUserFromDB(req.user?.userId);
+  const result = await UserService.getMyProfileFromDB(req.user?.userId);
   sendResponse<IUser>(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'User retrieve successfully',
+    message: "User's information retrieved successfully",
     data: result,
   });
 });
