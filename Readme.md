@@ -15,23 +15,23 @@
 
 ### User
 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users (GET) 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/6177a5b87d32123f08d2f5d4 (Single GET) 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/6177a5b87d32123f08d2f5d4 (PATCH) 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/6177a5b87d32123f08d2f5d4 (DELETE) 
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users (GET)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/64a009192908a21f465ed531 (Single GET)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/64a009192908a21f465ed531 (PATCH)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/users/64a009192908a21f465ed531 (DELETE)
 
 #### Cows
 
 - Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows (POST)
 - Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows (GET)
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/6177a5b87d32123f08d2f5d4 (Single GET) 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/6177a5b87d32123f08d2f5d4 (PATCH) 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/6177a5b87d32123f08d2f5d4 (DELETE) 
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/649f82a943ac46da00dde863 (Single GET)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/649f82a943ac46da00dde863 (PATCH)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/cows/649f82a943ac46da00dde863 (DELETE)
 
 #### Orders
 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders (POST)
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders (GET)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders (POST)(Buyer)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders (GET) (ADMIN)
 
 ## Bonus Part
 
@@ -46,4 +46,4 @@
 
 #### Order:
 
-- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders/6177a5b87d32123f08d2f5d4 (GET)
+- Route: https://digital-cow-hut-auth-assignment4.vercel.app/api/v1/orders/649f833243ac46da00dde875 (GET)
