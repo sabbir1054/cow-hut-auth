@@ -53,14 +53,41 @@ const validateSpecificUser =
         throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
       }
 
-      // work for specific user
       let findUser;
-      if (verifiedUser.role === 'seller') {
+
+      // if admin then this function end here
+      if (isCorrectUserRole && verifiedUser.role === 'admin') {
+        findUser = verifiedUser;
+      }
+
+      // work for specific user
+      // this portion for cow routes
+      if (verifiedUser.role === 'seller' && req.originalUrl.includes('cows')) {
         findUser = await Cow.findOne({
           _id: req.params.id,
           seller: verifiedUser.userId,
         });
       }
+
+      // this portion for orders route
+      if (
+        verifiedUser.role === 'seller' &&
+        req.originalUrl.includes('orders')
+      ) {
+        const orderInfo = await Order.findOne({
+          _id: req.params.id,
+        }).populate({
+          path: 'cow',
+          populate: [{ path: 'seller' }],
+        });
+        console.log(orderInfo);
+
+        const sellerFromDB = orderInfo?.cow?.seller;
+        if (sellerFromDB?._id.toString() === verifiedUser.userId) {
+          findUser = sellerFromDB;
+        }
+      }
+
       if (verifiedUser.role === 'buyer') {
         findUser = await Order.findOne({
           cow: req.params.id,
