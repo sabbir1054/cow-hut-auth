@@ -20,6 +20,7 @@ const AdminSchema = new Schema<IAdmin>(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     address: {
       type: String,
@@ -30,6 +31,9 @@ const AdminSchema = new Schema<IAdmin>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: function (doc, ret) {
+        delete ret.password; // Exclude password field from the response
+      },
     },
   }
 );

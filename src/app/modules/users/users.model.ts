@@ -52,6 +52,9 @@ export const UserSchema = new Schema<IUser, UserModel>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: function (doc, ret) {
+        delete ret.password; // Exclude password field from the response
+      },
     },
   }
 );
