@@ -3,8 +3,9 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IAdmin } from './admin.interface';
+import { IAdmin, IAdminLoginResponse } from './admin.interface';
 import { AdminService } from './admin.service';
+import config from '../../../config';
 
 const createAdmin = catchAsync(async (req: Request, res: Response) => {
   const adminData = req.body;
@@ -18,6 +19,29 @@ const createAdmin = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const loginAdmin = catchAsync(async (req: Request, res: Response) => {
+  const { ...loginData } = req.body;
+  const result = await AdminService.adminLogin(loginData);
+  const { refreshToken, ...others } = result;
+
+  // set refresh token into cookie
+
+  const cookieOptions = {
+    secure: config.env === 'production',
+    httpOnly: true,
+  };
+
+  res.cookie('refreshToken', refreshToken, cookieOptions);
+
+  sendResponse<IAdminLoginResponse>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User logged in successfully !',
+    data: others,
+  });
+});
+
 export const AdminController = {
   createAdmin,
+  loginAdmin,
 };

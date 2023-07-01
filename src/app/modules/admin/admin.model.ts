@@ -48,7 +48,7 @@ AdminSchema.pre('save', async function (next: NextFunction) {
 });
 
 // is exist and password match
-AdminSchema.static.isAdminExist = async function (
+AdminSchema.statics.isAdminExist = async function (
   phoneNumber: string
 ): Promise<Pick<IAdmin, '_id' | 'password' | 'role'> | null> {
   return Admin.findOne({ phoneNumber }, { _id: 1, role: 1, password: 1 });
