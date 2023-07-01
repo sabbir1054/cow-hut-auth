@@ -11,4 +11,14 @@ export type IAdmin = {
   address: string;
 };
 
+export type IAdminLogin = {
+  phoneNumber: string;
+  password: string;
+};
+
+export type IAdminLoginResponse = {
+  accessToken: string;
+  refreshToken?: string;
+};
+
 export type AdminModel = Model<IAdmin, Record<string, unknown>>;
