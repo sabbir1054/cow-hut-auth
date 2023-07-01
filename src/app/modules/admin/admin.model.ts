@@ -13,6 +13,13 @@ const AdminSchema = new Schema<IAdmin>(
       required: true,
       unique: true,
     },
+    name: {
+      firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: String,
+    },
     role: {
       type: String,
       enum: adminRole,

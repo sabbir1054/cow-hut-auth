@@ -10,6 +10,7 @@ const createAdminToDB = async (payload: IAdmin): Promise<IAdmin | null> => {
   const result = await Admin.create(payload);
   return result;
 };
+
 const adminLogin = async (payload: IAdmin): Promise<IAdminLoginResponse> => {
   const { phoneNumber, password } = payload;
 
