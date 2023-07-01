@@ -7,6 +7,12 @@ import { UserController } from './users.controller';
 import { UserValidation } from './users.validation';
 
 const router = express.Router();
+// my profile
+router.get(
+  '/my-profile',
+  Auth.validateUsersRole(ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
+  UserController.getMyProfile
+);
 
 router.post(
   '/signup',
@@ -29,6 +35,7 @@ router.get(
   Auth.validateUsersRole(ENUM_USER_ROLE.ADMIN),
   UserController.getSingleUser
 );
+
 router.get(
   '/',
   Auth.validateUsersRole(ENUM_USER_ROLE.ADMIN),
