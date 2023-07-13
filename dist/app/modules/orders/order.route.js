@@ -15,5 +15,5 @@ router.post('/', (0, validedRequest_1.default)(order_validation_1.OrderValidatio
 /* Specific user  ===> Specific Order*/
 router.get('/:id', auth_1.Auth.validateSpecificUser(users_1.ENUM_USER_ROLE.SELLER, users_1.ENUM_USER_ROLE.BUYER, users_1.ENUM_USER_ROLE.ADMIN), order_controller_1.OrderController.getSingleOrders);
 /* Admin ===> All Order*/
-router.get('/', auth_1.Auth.validateUsersRole(users_1.ENUM_USER_ROLE.ADMIN), order_controller_1.OrderController.getAllOrders);
+router.get('/', auth_1.Auth.validateUsersRole(users_1.ENUM_USER_ROLE.SELLER, users_1.ENUM_USER_ROLE.BUYER, users_1.ENUM_USER_ROLE.ADMIN), order_controller_1.OrderController.getAllOrders);
 exports.OrderRoutes = router;

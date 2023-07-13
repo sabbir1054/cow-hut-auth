@@ -95,10 +95,30 @@ const createOrderToDB = (payload) => __awaiter(void 0, void 0, void 0, function*
     }
     return newOrderResult;
 });
-const getAllOrdersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.Order.find()
-        .populate('buyer')
-        .populate({ path: 'cow', populate: [{ path: 'seller' }] });
+const getAllOrdersFromDB = (role, id) => __awaiter(void 0, void 0, void 0, function* () {
+    let result = null;
+    if (role === 'admin') {
+        result = yield order_model_1.Order.find()
+            .populate('buyer')
+            .populate({ path: 'cow', populate: [{ path: 'seller' }] });
+    }
+    if (role === 'buyer') {
+        result = yield order_model_1.Order.find({ buyer: id })
+            .populate('buyer')
+            .populate({ path: 'cow', populate: [{ path: 'seller' }] });
+    }
+    if (role === 'seller') {
+        const isUserExist = users_model_1.User.findById(id);
+        if (!isUserExist) {
+            throw new ApiErrors_1.default(http_status_1.default.NOT_FOUND, 'Seller not found');
+        }
+        const sellerCows = yield cow_model_1.Cow.find({ seller: id });
+        result = yield order_model_1.Order.find({ cow: { $in: sellerCows } })
+            .populate('cow')
+            .populate({ path: 'buyer', model: 'User' })
+            .populate({ path: 'cow', populate: { path: 'seller', model: 'User' } })
+            .exec();
+    }
     return result;
 });
 const getSingleOrdersFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

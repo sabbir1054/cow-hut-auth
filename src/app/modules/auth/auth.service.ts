@@ -9,6 +9,7 @@ import {
   IRefreshTokenResponse,
   IUsersLoginResponse,
 } from './auth.interface';
+import { IUser } from '../users/users.interface';
 
 const usersLogin = async (
   payload: ILoginUser
@@ -49,6 +50,10 @@ const usersLogin = async (
   };
 };
 
+const userSignUp = async (payload: IUser): Promise<IUser | null> => {
+  const result = await User.create(payload);
+  return result;
+};
 const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   let verifiedToken = null;
 
@@ -82,6 +87,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 };
 
 export const AuthService = {
+  userSignUp,
   usersLogin,
   refreshToken,
 };

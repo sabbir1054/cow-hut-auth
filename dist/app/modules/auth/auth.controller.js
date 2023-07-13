@@ -62,7 +62,18 @@ const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
         data: result,
     });
 }));
+const signUpUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userData = req.body;
+    const result = yield auth_service_1.AuthService.userSignUp(userData);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: 'User created successfully',
+        data: result,
+    });
+}));
 exports.AuthController = {
+    signUpUser,
     loginUser,
     refreshToken,
 };

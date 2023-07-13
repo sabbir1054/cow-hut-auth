@@ -88,7 +88,6 @@ const updateMyProfile = (0, catchAsync_1.default)((req, res) => __awaiter(void 0
     var _b;
     const updatedData = req.body;
     const result = yield users_service_1.UserService.updateUserToDB((_b = req.user) === null || _b === void 0 ? void 0 : _b.userId, updatedData);
-    console.log(result);
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,

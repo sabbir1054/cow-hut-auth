@@ -39,6 +39,10 @@ const usersLogin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
         refreshToken,
     };
 });
+const userSignUp = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield users_model_1.User.create(payload);
+    return result;
+});
 const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     let verifiedToken = null;
     try {
@@ -60,6 +64,7 @@ const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     };
 });
 exports.AuthService = {
+    userSignUp,
     usersLogin,
     refreshToken,
 };
